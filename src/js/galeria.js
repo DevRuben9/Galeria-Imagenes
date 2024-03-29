@@ -1,18 +1,23 @@
-const btnModal = document.querySelector('.btnModal');
-const modal = document.querySelector('.modalOverlay');
-const btnClose = document.querySelector('.closeModalBtn');
+//Preview
+$(function() {
+  $('#loadPhoto').change(function(e) {
+    addImage(e);
+  });
 
-function openModal() {
-    modal.classList.remove("hide");
-}
+  function addImage(e){
+    var file = e.target.files[0],
+    imageType = /image.*/;
 
-function closeModal(e, clickedOutside) {
-    if (clickedOutside) {
-        if (e.target.classList.contains("modalOverlay"))
-            modal.classList.add("hide");
-    } else{ modal.classList.add("hide"); }
-}
+    if (!file.type.match(imageType))
+      return;
 
-btnModal.addEventListener("click", openModal);
-modal.addEventListener("click", (e) => closeModal(e, true));
-btnClose.addEventListener("click", closeModal);
+    var reader = new FileReader();
+    reader.onload = fileOnload;
+    reader.readAsDataURL(file);
+  }
+
+  function fileOnload(e) {
+    var result=e.target.result;
+    $('#photoSelect').attr("src",result);
+  }
+});
