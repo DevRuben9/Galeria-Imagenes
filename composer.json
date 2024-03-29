@@ -1,0 +1,17 @@
+{
+    "name": "ruben/imagenes",
+    "autoload": {
+        "psr-4": {
+            "Ruben\\Imagenes\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "DevRuben9",
+            "email": "sinanipaxi9@gmail.com"
+        }
+    ],
+    "require": {
+        "intervention/image": "^3.5"
+    }
+}
