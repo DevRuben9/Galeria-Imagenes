@@ -2,9 +2,9 @@
 
 if (isset($_GET['view'])) {
 	$view = $_GET['view'];
-	require 'src/' . $view . '.php';
+	require 'src/view/' . $view . '.php';
 }else{
-	require 'src/home.php';
+	require 'src/view/home.php';
 }
 
 ?>
