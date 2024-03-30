@@ -3,10 +3,16 @@
   margin: 0; }
 
 .container {
-  padding: 2% 3%; }
+  height: 84vh;
+  padding: 2% 3%;
+  display: flex;
+  justify-content: center;
+  background-image: radial-gradient(circle at 74.18% 116.45%, #e2ffce 0, #d0ffd1 10%, #beffd3 20%, #adffd3 30%, #9df8d1 40%, #8fe8cc 50%, #84d8c6 60%, #7bcabf 70%, #75beba 80%, #71b4b5 90%, #6facb1 100%); }
 
 .btnModal {
+  width: 100%;
   padding: 15px 20px;
+  margin-top: 10px;
   background: #25571e;
   border-style: none;
   color: #fff;
@@ -14,10 +20,35 @@
   .btnModal:hover {
     background: #37682d; }
 
-.formulario {
-  background-color: #efefef;
-  padding: 32px;
+form {
+  font-family: Vegur, 'PT Sans', Verdana, sans-serif;
+  width: 80%;
+  padding: 30px 35px;
   border-radius: 20px; }
+  form .formulario {
+    display: grid;
+    grid-template-columns: 78% 22%;
+    grid-template-rows: 10% 90%;
+    gap: 15px; }
+    form .formulario h2 {
+      text-align: center;
+      grid-area: 1 / 1 / 2 /3; }
+    form .formulario .form {
+      display: flex;
+      flex-direction: column; }
+      form .formulario .form .inputform {
+        margin: 7px; }
+        form .formulario .form .inputform .nombretext {
+          font-size: 20px;
+          margin-top: 10px;
+          width: 100%;
+          border-style: none;
+          padding: 5px 0px 5px 0px; }
+        form .formulario .form .inputform .contenttext {
+          font-size: 20px;
+          margin-top: 9px;
+          width: 100%;
+          border-style: none; }
 
 input[type="file"] {
   padding: 4px;
@@ -48,6 +79,7 @@ input[type="file"] {
     input[type="file"]::file-selector-button:active {
       background-color: #e5e7eb; }
   input[type="file"]::before {
+    color: #fff;
     position: absolute;
     pointer-events: none;
     top: 14px;
@@ -66,6 +98,16 @@ input[type="file"] {
   input[type="file"]:focus-within::file-selector-button, input[type="file"]:focus::file-selector-button {
     outline: 2px solid var(--primary-color);
     outline-offset: 2px; }
+
+.preview {
+  background-color: #789;
+  width: 200px;
+  height: 200px;
+  border-radius: 20px;
+  margin-bottom: 10px; }
+  .preview img {
+    width: 100%;
+    height: 100%; }
 
 nav {
   background: #19191a; }
@@ -90,11 +132,5 @@ nav {
         nav ul li a:hover::after {
           width: 100%;
           background: #fff; }
-
-.preview {
-  margin: auto;
-  width: 150px;
-  height: 150px;
-  border-radius: 150px; }
 
 /*# sourceMappingURL=style.css.map */

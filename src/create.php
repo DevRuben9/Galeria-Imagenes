@@ -10,13 +10,27 @@
 <body>
 	<?php require 'Content/navbar.php'; ?>
 	<div class="container">
-		<button class="btnModal">Crear Imagen</button>
-		
-		<div class="formulario">
-			<div class="preview"><img src="" id="photoSelect" alt=""></div>
-			<div><input type="file" name="imagen" id="loadPhoto"></div>
-		</div>
-
+		<form action="" method="">
+			<div class="formulario">
+				<h2>Datos de la Imagen</h2>
+				<div class="form">
+					<div class="inputform">
+						<img src="src/icons/imagen.png" alt=""><label for="">Nombre</label>
+						<input type="text" class="nombretext">
+					</div>
+					<div class="inputform">
+						<img src="src/icons/detalle.png" alt="" style="width: 20px;"><label for="">Detalles</label>
+						<textarea class="contenttext" cols="40" rows="4"></textarea>
+					</div>
+					<button class="btnModal">Crear Imagen</button>
+				</div>
+				<div class="image">
+					<div class="preview"><img src="src/img/avatar0.jpg" id="photoSelect" alt=""></div>
+					<input type="file" name="imagen" id="loadPhoto">
+				</div>
+			</div>
+			
+		</form>
 	</div>
 <script type="text/javascript" src="src/js/galeria.js"></script>
 </body>
