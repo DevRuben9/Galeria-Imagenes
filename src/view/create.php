@@ -3,13 +3,13 @@
 	namespace Ruben\Imagenes\models;
 
 	if (count($_POST)>0) {
-		$name = isset($_POST['name']) ?? '';
-		$details = isset($_POST['details']) ?? '';
+		$name = $_POST['nombreImagen'] ?? '';
+		$details = $_POST['detalleImagen'] ?? '';
 		$location = $_FILES['imagen'];
 		
 		$locationName = $_FILES['imagen']['name'];
 		$locationTempName = $_FILES['imagen']['tmp_name'];
-		
+		$locationError = $_FILES['imagen']['error'];
 		$locationExt = explode('.', $locationName);
 
 		$locationActualExt = strtolower(end($locationExt));
@@ -17,20 +17,26 @@
 		$allowedExt = array("jpg","jpeg","png","pdf");
 		$locationDestination = '';
 		if(in_array($locationActualExt, $allowedExt)){
-			$locationNemeNew = uniqid('',true).".".$locationActualExt;
-        //File destination
-        $locationDestination = 'img/'.$locationNemeNew;
-        //function to move temp location to permanent location
-        move_uploaded_file($locationTempName, $locationDestination);
-        //Message after success
-        echo "File Uploaded successfully</br>";
+			if($locationError == 0){
+				$locationNemeNew = uniqid('',true).".".$locationActualExt;
+        $locationDestination = $locationNemeNew;
+        $locationfile = 'src/view/img/';
+			if (!file_exists($locationfile)) {
+			    mkdir($locationfile, 0777, true);
+			}
+
+        move_uploaded_file($locationTempName, "$locationfile/$locationDestination");
+
+        // echo "File Uploaded successfully</br>";
+			}else{
+				echo "Something Went Wrong Please try again!";
+			}
 		}else{
 			echo "You can't upload this extention of file";
 		}
 
 		$galeria = new Galeria($name, $details, $locationDestination);
 		$galeria->save();
-		echo $galeria->getLocation();
 
 	}
 ?>
