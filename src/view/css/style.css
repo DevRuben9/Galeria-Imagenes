@@ -43,12 +43,14 @@ form {
           margin-top: 10px;
           width: 100%;
           border-style: none;
-          padding: 5px 0px 5px 0px; }
+          padding: 5px 0px 5px 0px;
+          outline: none; }
         form .formulario .form .inputform .contenttext {
           font-size: 20px;
           margin-top: 9px;
           width: 100%;
-          border-style: none; }
+          border-style: none;
+          outline: none; }
 
 input[type="file"] {
   padding: 4px;

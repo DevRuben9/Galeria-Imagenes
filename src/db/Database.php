@@ -15,7 +15,7 @@ class Database
 
   public function __construct(){
       $this->host = '127.0.0.1';
-      $this->db = 'galeriaimagenes';
+      $this->db = 'galeriaimagen';
       $this->user = 'root';
       $this->password = '';
       $this->charset = 'uft8mb4';
