@@ -28,11 +28,11 @@ class Galeria extends Database {
 		    $imagen = Galeria::createFromArray($res);
 		    array_push($galeria, $imagen);
 		}
-		return $galaria;
+		return $galeria;
 	}
 
 	public static function createFromArray($arr):Galeria{
-		$imagen = new Galeria($arr['name'], $arr['detalles'], $arr['location']);
+		$imagen = new Galeria($arr['name'], $arr['details'], $arr['location']);
 		$imagen->setUUID($arr['uuid']);
 		return $imagen;
 	}
