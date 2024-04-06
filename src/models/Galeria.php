@@ -31,6 +31,21 @@ class Galeria extends Database {
 		return $galeria;
 	}
 
+	public static function get($uuid) {
+		$db = new Database();
+		$query = $db->conn()->prepare("SELECT * FROM imagenes WHERE uuid = :uuid");
+		$query->execute(['uuid' => $uuid]);
+
+		$galeria = Galeria::createFromArray($query->fetch(PDO::FETCH_ASSOC));
+
+		return $galeria;
+	}
+
+	public function update(){
+		$query = $this->conn()->prepare('UPDATE imagenes SET name = :name, details = :details, location = :location, updated = NOW() WHERE uuid = :uuid');
+		$query->execute(['uuid' => $this->uuid,'name' => $this->name, 'details' => $this->details, 'location' => $this->location]);
+	}
+
 	public static function createFromArray($arr):Galeria{
 		$imagen = new Galeria($arr['name'], $arr['details'], $arr['location']);
 		$imagen->setUUID($arr['uuid']);
@@ -48,7 +63,7 @@ class Galeria extends Database {
 		return $this->name;
 	}
 
-	public function setName($avlue){
+	public function setName($value){
 		$this->name = $value;
 	}
 
