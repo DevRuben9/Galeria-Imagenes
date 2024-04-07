@@ -76,7 +76,7 @@ if ($_POST) {
 
 	<div class="container">
 		<div class="message"><?php if (isset($message)) {
-			echo $message['mess']; }?>		
+			echo $message['mess']; }?>
 		</div>
 		<form action="?view=update&id=<?= $galeria->getUUID(); ?>" method="post" enctype="multipart/form-data">
 			<div class="formulario">
