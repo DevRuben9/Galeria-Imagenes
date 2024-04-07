@@ -75,9 +75,11 @@ if ($_POST) {
 	<?php require 'Content/navbar.php'; ?>
 
 	<div class="container">
-		<div class="message"><?php if (isset($message)) {
-			echo $message['mess']; }?>
-		</div>
+		<?php if (isset($message)) { ?>
+			<div class="message">
+				<?= $message['mess']; ?>
+			</div>
+		<?php } ?>
 		<form action="?view=update&id=<?= $galeria->getUUID(); ?>" method="post" enctype="multipart/form-data">
 			<div class="formulario">
 				<h2>Datos de la Imagen</h2>
