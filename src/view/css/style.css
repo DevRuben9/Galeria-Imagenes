@@ -7,6 +7,17 @@
   padding: 2% 3%;
   background-image: radial-gradient(circle at 74.18% 116.45%, #e2ffce 0, #d0ffd1 10%, #beffd3 20%, #adffd3 30%, #9df8d1 40%, #8fe8cc 50%, #84d8c6 60%, #7bcabf 70%, #75beba 80%, #71b4b5 90%, #6facb1 100%); }
 
+.message {
+  color: #fff;
+  width: 300px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  padding: 5px;
+  background-color: #258d19; }
+
 .btnModal {
   width: 100%;
   padding: 15px 20px;

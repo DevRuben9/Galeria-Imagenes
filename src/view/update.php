@@ -3,41 +3,52 @@
 use	Ruben\Imagenes\models\Galeria;
 
 if ($_POST) {
+	$uuid = $_GET['id'];
+	$galeria = Galeria::get($uuid);
 	// update galeria
 	$name = isset($_POST['nombreImagen']) ? $_POST['nombreImagen'] : '';
 	$details = isset($_POST['detalleImagen']) ? $_POST['detalleImagen'] : '';
-	$location = $_FILES['imagen'];
-	$locationName = $_FILES['imagen']['name'];
-	$locationTempName = $_FILES['imagen']['tmp_name'];
-	$locationError = $_FILES['imagen']['error'];
-	$locationExt = explode('.', $locationName);
-
-	$locationActualExt = strtolower(end($locationExt));
-
-	$allowedExt = array("jpg","jpeg","png","pdf");
 	$locationDestination = '';
-	if(in_array($locationActualExt, $allowedExt)){
-		if($locationError == 0){
-			$locationNemeNew = uniqid('',true).".".$locationActualExt;
-      $locationDestination = $locationNemeNew;
-      $locationfile = 'src/view/img/';
-		if (!file_exists($locationfile)) {
-		    mkdir($locationfile, 0777, true);
+	$message = [];
+	if (isset($_FILES['imagen']) && $_FILES['imagen']['size'] > 0) {
+		$location = $_FILES['imagen'];
+		$locationName = $_FILES['imagen']['name'];
+		$locationTempName = $_FILES['imagen']['tmp_name'];
+		$locationError = $_FILES['imagen']['error'];
+		$locationExt = explode('.', $locationName);
+
+		$locationActualExt = strtolower(end($locationExt));
+
+		$allowedExt = array("jpg","jpeg","png","pdf");
+		if(in_array($locationActualExt, $allowedExt)){
+			if($locationError == 0){
+				$locationNemeNew = uniqid('',true).".".$locationActualExt;
+	      $locationDestination = $locationNemeNew;
+	      $locationfile = 'src/view/img/';
+			if (!file_exists($locationfile)) {
+			    mkdir($locationfile, 0777, true);
+			}
+			if (unlink('src/view/img/'.$galeria->getLocation())) {
+				$message = ['mess' => 'Se reemplazo la imagen con exito'];
+			}
+
+	      move_uploaded_file($locationTempName, "$locationfile/$locationDestination");
+
+	      // echo "File Uploaded successfully</br>";
+			}else{
+				echo "Something Went Wrong Please try again!";
+			}
+		} else {
+			echo "You can't upload this extention of file";
 		}
 
-      move_uploaded_file($locationTempName, "$locationfile/$locationDestination");
-
-      // echo "File Uploaded successfully</br>";
-		}else{
-			echo "Something Went Wrong Please try again!";
-		}
-	}else{
-		echo "You can't upload this extention of file";
+	}else {
+		$locationDestination = $galeria->getLocation();
 	}
 
-	$uuid = $_GET['id'];
+	
 
-	$galeria = Galeria::get($uuid);
+	
 	$galeria->setName($name);
 	$galeria->setDetails($details);
 	$galeria->setLocation($locationDestination);
@@ -64,6 +75,9 @@ if ($_POST) {
 	<?php require 'Content/navbar.php'; ?>
 
 	<div class="container">
+		<div class="message"><?php if (isset($message)) {
+			echo $message['mess']; }?>		
+		</div>
 		<form action="?view=update&id=<?= $galeria->getUUID(); ?>" method="post" enctype="multipart/form-data">
 			<div class="formulario">
 				<h2>Datos de la Imagen</h2>
@@ -80,13 +94,13 @@ if ($_POST) {
 				</div>
 				<div class="image">
 					<div class="preview"><img src="src/view/img/<?= $galeria->getLocation(); ?>" id="photoSelect" alt=""></div>
-					<input type="file" name="imagen" id="loadPhoto">
+					<input type="file" name="imagen" id="loadPhoto"/>
 				</div>
 			</div>
 			
 		</form>
 	</div>
-<script type="text/javascript" src="src/view/js/galeria.js"></script>
 
+<script type="text/javascript" src="src/view/js/galeria.js"></script>
 </body>
 </html>
